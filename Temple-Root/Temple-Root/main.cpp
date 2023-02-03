@@ -1,47 +1,28 @@
-#ifdef _DEBUG  
-#pragma comment(lib,"sfml-graphics-d.lib")  
-#pragma comment(lib,"sfml-audio-d.lib")  
-#pragma comment(lib,"sfml-system-d.lib")  
-#pragma comment(lib,"sfml-window-d.lib")  
-#pragma comment(lib,"sfml-network-d.lib")  
-#else  
-#pragma comment(lib,"sfml-graphics.lib")  
-#pragma comment(lib,"sfml-audio.lib")  
-#pragma comment(lib,"sfml-system.lib")  
-#pragma comment(lib,"sfml-window.lib")  
-#pragma comment(lib,"sfml-network.lib")  
-#endif  
+#ifdef _DEBUG 
+#pragma comment(lib,"sfml-graphics-d.lib") 
+#pragma comment(lib,"sfml-audio-d.lib") 
+#pragma comment(lib,"sfml-system-d.lib") 
+#pragma comment(lib,"sfml-window-d.lib") 
+#pragma comment(lib,"sfml-network-d.lib") 
+#pragma comment(lib,"thor-d.lib") 
+#else 
+#pragma comment(lib,"sfml-graphics.lib") 
+#pragma comment(lib,"sfml-audio.lib") 
+#pragma comment(lib,"sfml-system.lib") 
+#pragma comment(lib,"sfml-window.lib") 
+#pragma comment(lib,"sfml-network.lib") 
+#pragma comment(lib,"thor.lib")
+#endif 
+#pragma comment(lib,"opengl32.lib") 
+#pragma comment(lib,"glu32.lib") 
 
-#include <iostream>
-#include <SFML/Graphics.hpp> 
+
+
+
+#include "Game.h"
 
 void main()
 {
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML Project");
-
-	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-	sf::Clock clock;
-	clock.restart();
-
-
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-		timeSinceLastUpdate += clock.restart();
-
-		if (timeSinceLastUpdate > timePerFrame)
-		{
-			window.display();
-
-			timeSinceLastUpdate = sf::Time::Zero;
-		}
-	}
+	Game game;
+	game.run();
 }
