@@ -17,7 +17,9 @@ void Game::run()
 
 	while (m_window.isOpen())
 	{
+		//m_window.clear(sf::Color::White);
 		sf::Event event;
+
 		while (m_window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -33,19 +35,22 @@ void Game::run()
 			timeSinceLastUpdate = sf::Time::Zero;
 		}
 		render();
+		update();
 	}
 }
 
 void Game::init()
 {
+	myPlayer.init();
 }
 
-void Game::update(double dt)
+void Game::update()
 {
-
+	myPlayer.handleInput();
 }
 
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
+	m_window.draw(myPlayer.PlayerSprite);
 }
