@@ -1,41 +1,30 @@
 #include "Game.h"
 
 Game::Game()
-	: m_window(sf::VideoMode(1920,1080,32), "Temple Root", sf::Style::Default)
+	: m_window(sf::VideoMode(1920,1080,32), "Temple Root", sf::Style::Default)//screen width, screen height, bits per pixel, Name at top of Window
 {
-	init();
+	init();// sets up all variables and objects
 }
 
 void Game::run()
 {
-	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
-	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	sf::Clock clock;
-	clock.restart();
-
-
-
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	const float fps{ 60.0f };
+	sf::Time timePerFrame = sf::seconds(1.0f / fps); // 60 fps
 	while (m_window.isOpen())
 	{
-		//m_window.clear(sf::Color::White);
-		sf::Event event;
-
-		while (m_window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				m_window.close();
-		}
-
 		timeSinceLastUpdate += clock.restart();
-
-		if (timeSinceLastUpdate > timePerFrame)
+		while (timeSinceLastUpdate > timePerFrame)
 		{
-			m_window.display();
-
-			timeSinceLastUpdate = sf::Time::Zero;
+			timeSinceLastUpdate -= timePerFrame;
+			update(timePerFrame); //60 fps
+			render(); // as many as possible
+			if (m_exitGame == true)
+			{
+				m_window.close();
+			}
 		}
-		render();
-		update();
 	}
 }
 
@@ -44,13 +33,19 @@ void Game::init()
 	myPlayer.init();
 }
 
-void Game::update()
+void Game::update(sf::Time t_deltaTime)
 {
-	myPlayer.handleInput();
+	myPlayer.handleInput();//used for player movement
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		m_exitGame = true;//closes the game
+	}
 }
 
 void Game::render()
 {
-	m_window.clear(sf::Color::White);
+	m_window.clear(sf::Color::White);//clears the screen and sets a background colour
 	m_window.draw(myPlayer.PlayerSprite);
+	m_window.display();//shows evrything on screen (important)
 }
