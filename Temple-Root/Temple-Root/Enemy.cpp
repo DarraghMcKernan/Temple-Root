@@ -9,6 +9,7 @@ void Enemy::init()
 	EnemySprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
 	EnemySprite.setTexture(EnemyTexture);
 	EnemySprite.setScale(3,3);
+	EnemySprite.setOrigin(8, 8);
 	EnemySprite.setPosition(enemyPosition);
 }
 
