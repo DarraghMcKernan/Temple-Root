@@ -6,6 +6,7 @@ void Player::handleInput()
 	runningAnimations = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
+		left = false;
 		PlayerPos.x += XSpeed;
 		PlayerSprite.setScale(3, 3);
 		runningAnimations = true;
@@ -17,6 +18,7 @@ void Player::handleInput()
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
+		left = true;
 		PlayerPos.x -= XSpeed;
 		PlayerSprite.setScale(-3, 3);
 		runningAnimations = true;
@@ -172,4 +174,14 @@ void Player::keepPlayerOnBlock(float t_blockYPos)
 
 	PlayerSprite.setPosition(PlayerPos.x, PlayerPos.y);
 	
+}
+
+void Player::hitWalls(float t_blockXPos)
+{
+	if (left == true)
+	{
+		PlayerPos.x = t_blockXPos+84;
+	}
+	else PlayerPos.x = t_blockXPos -24;
+	PlayerSprite.setPosition(PlayerPos);
 }

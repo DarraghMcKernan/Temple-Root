@@ -15,6 +15,7 @@ public:
 	void snapRelicToHand();
 	void enemyCollisions();
 	void keepPlayerOnBlock(float t_blockXPos);
+	void hitWalls(float t_blockXPos);
 private:
 	int runningAnimations = false;
 	int idleAnimations = true;
@@ -22,6 +23,8 @@ private:
 	bool currentlyOnBlock = false;
 
 	int jumpCounter = 10;
+
+	bool left = true;
 
 	int lives = 3;
 	//hearts
