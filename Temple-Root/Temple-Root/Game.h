@@ -20,7 +20,8 @@ private:
 
 	bool m_exitGame = false;
 
-
+	sf::Sprite backgroundSprite;
+	sf::Texture backgroundTexture;
 	//render window 
 	sf::RenderWindow m_window;
 };

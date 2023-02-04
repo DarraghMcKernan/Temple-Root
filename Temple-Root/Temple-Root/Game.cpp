@@ -52,6 +52,12 @@ void Game::processKeys(sf::Event t_event)
 void Game::init()
 {
 	myPlayer.init();
+
+	if(!backgroundTexture.loadFromFile("ASSETS/IMAGES/StoneTiles.png"))
+	{ }
+	backgroundSprite.setTexture(backgroundTexture);
+	backgroundSprite.setScale(2, 2);
+	backgroundSprite.setColor(sf::Color(130, 130, 130));
 }
 
 void Game::update(sf::Time t_deltaTime)
@@ -67,6 +73,7 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);//clears the screen and sets a background colour
+	m_window.draw(backgroundSprite);
 	m_window.draw(myPlayer.PlayerSprite);
 	m_window.display();//shows evrything on screen (important)
 }
