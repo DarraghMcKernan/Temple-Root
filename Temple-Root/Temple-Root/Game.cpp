@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game()
-	: m_window(sf::VideoMode(1920,1080,32), "Temple Root", sf::Style::Default)//screen width, screen height, bits per pixel, Name at top of Window
+	: m_window(sf::VideoMode(1920,1080,32), "Temple Root", sf::Style::Fullscreen)//screen width, screen height, bits per pixel, Name at top of Window
 {
 	init();// sets up all variables and objects
 }
@@ -73,13 +73,18 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+
 }
 
 void Game::render()
 {
 	m_window.clear(sf::Color::White);//clears the screen and sets a background colour
 	m_window.draw(backgroundSprite);
-	firstLevel.render(m_window);
+	sf::Vector2f playerStandHere = firstLevel.render(m_window,myPlayer.PlayerSprite);
+	if (playerStandHere != sf::Vector2f(0, 0))
+	{
+		myPlayer.keepPlayerOnBlock(playerStandHere.y);
+	}
 	m_window.draw(firstEnemy.EnemySprite);
 	myPlayer.render(m_window);
 	m_window.display();//shows evrything on screen (important)
