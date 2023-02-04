@@ -21,8 +21,10 @@
 
 #include "Game.h"
 
-void main()
+int main()
 {
 	Game game;
 	game.run();
+
+	return 1;
 }

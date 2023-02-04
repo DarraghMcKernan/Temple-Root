@@ -14,17 +14,38 @@ void Game::run()
 	sf::Time timePerFrame = sf::seconds(1.0f / fps); // 60 fps
 	while (m_window.isOpen())
 	{
+		processEvents(); // as many as possible
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > timePerFrame)
 		{
 			timeSinceLastUpdate -= timePerFrame;
+			processEvents(); // at least 60 fps
 			update(timePerFrame); //60 fps
-			render(); // as many as possible
-			if (m_exitGame == true)
-			{
-				m_window.close();
-			}
 		}
+		render(); // as many as possible
+	}
+}
+
+void Game::processEvents()
+{
+	sf::Event newEvent;
+	while (m_window.pollEvent(newEvent))
+	{
+		if (sf::Event::Closed == newEvent.type) // window message
+		{
+			m_exitGame = true;
+		}
+		if (sf::Event::KeyPressed == newEvent.type) //user pressed a key
+		{
+			processKeys(newEvent);
+		}
+	}
+}
+void Game::processKeys(sf::Event t_event)
+{
+	if (sf::Keyboard::Escape == t_event.key.code)
+	{
+		m_exitGame = true;
 	}
 }
 
@@ -37,9 +58,9 @@ void Game::update(sf::Time t_deltaTime)
 {
 	myPlayer.handleInput();//used for player movement
 	myPlayer.update();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	if (m_exitGame)
 	{
-		m_exitGame = true;//closes the game
+		m_window.close();
 	}
 }
 
