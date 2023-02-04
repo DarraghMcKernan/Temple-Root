@@ -10,6 +10,8 @@ public:
 	Game();
 	void run();
 private:
+	void processEvents();
+	void processKeys(sf::Event t_event);
 	void init();
 	void update(sf::Time t_deltaTime);
 	void render();
