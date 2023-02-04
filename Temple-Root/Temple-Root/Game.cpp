@@ -36,7 +36,7 @@ void Game::init()
 void Game::update(sf::Time t_deltaTime)
 {
 	myPlayer.handleInput();//used for player movement
-
+	myPlayer.update();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		m_exitGame = true;//closes the game
