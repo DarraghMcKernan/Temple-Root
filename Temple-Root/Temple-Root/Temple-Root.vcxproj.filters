@@ -25,6 +25,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Relic.cpp">
+    <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,6 +37,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Relic.h">
+    <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
