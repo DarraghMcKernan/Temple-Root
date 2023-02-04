@@ -6,6 +6,10 @@ void Enemy::init()
 	{
 		std::cout << "problem loading texture";
 	}
+	if (!DeadEnemyTexture.loadFromFile("ASSETS/IMAGES/dead-worm.png"))
+	{
+		std::cout << "problem loading texture";
+	}
 	EnemySprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
 	EnemySprite.setTexture(EnemyTexture);
 	EnemySprite.setScale(3,3);
@@ -55,5 +59,13 @@ void Enemy::update()
 	
 	}
 	EnemySprite.setPosition(enemyPosition);
-	movement();
+
+	if (enemyIsAlive == false)
+	{
+		EnemySprite.setTexture(DeadEnemyTexture);
+		EnemySprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	}
+	else {
+		movement();
+	}
 }
