@@ -23,6 +23,10 @@ void Player::handleInput()
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		attackAnimation = true;
+	}
 	PlayerSprite.setPosition(PlayerPos);
 }
 
@@ -86,6 +90,21 @@ void Player::handleAnimations()
 	if (currentlyJumping == true)
 	{
 		PlayerSprite.setTextureRect(sf::IntRect(130, 30, 18, 25));
+	}
+	if (attackAnimation == true)
+	{
+		PlayerSprite.setTextureRect(sf::IntRect((64 * animationCurrentFrame), 96, 36, 22));
+		attackTimer++;
+		if (attackTimer >= animationMaxSpeed)
+		{
+			animationTimer = 0;
+			attackCurrentFrame++;
+			if (attackCurrentFrame >= maxAttackAnimation)
+			{
+				attackCurrentFrame = 0;
+				attackAnimation = false;
+			}
+		}
 	}
 }
 
