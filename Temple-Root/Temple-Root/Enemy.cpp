@@ -13,27 +13,28 @@ void Enemy::init()
 	EnemySprite.setPosition(enemyPosition);
 }
 
-void Enemy::movement()
+void Enemy::movement(int t_min, int t_max,int t_yPos)
 {
-	if (enemyPosition.x >= 900 && enemyPosition.x <= 1000 && backwards == false)
+	if (enemyPosition.x >= t_min && enemyPosition.x <= t_max && backwards == false)
 	{
 		enemyPosition.x++;
 		EnemySprite.setScale(-3, 3);
 
-		if (enemyPosition.x >= 1000)
+		if (enemyPosition.x >= t_max)
 		{
 			backwards = true;
 		}
 	}
-	if (enemyPosition.x >= 900 && enemyPosition.x <= 1000 && backwards == true)
+	if (enemyPosition.x >= t_min && enemyPosition.x <= t_max && backwards == true)
 	{
 		enemyPosition.x--;
 		EnemySprite.setScale(3, 3);
-		if (enemyPosition.x <= 900)
+		if (enemyPosition.x <= t_min)
 		{
 			backwards = false;
 		}
 	}
+	enemyPosition.y = t_yPos;
 	EnemySprite.setPosition(enemyPosition);
 }
 
@@ -55,5 +56,5 @@ void Enemy::update()
 	
 	}
 	EnemySprite.setPosition(enemyPosition);
-	movement();
+	//movement();
 }
