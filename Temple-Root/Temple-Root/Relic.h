@@ -12,6 +12,7 @@ public:
 	sf::Texture relicTexture;
 	sf::Sprite relicSprite;
 	sf::Vector2f relicPos{ 700,500 };
+	void randomPos();
 private:
 	int animationTimer = 0;
 	int animationMaxSpeed = 10;

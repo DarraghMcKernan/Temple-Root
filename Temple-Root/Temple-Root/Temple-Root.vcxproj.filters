@@ -7,6 +7,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Relic.cpp" />
     <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
@@ -14,5 +15,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Relic.h" />
     <ClInclude Include="Level1.h" />
+    <ClInclude Include="Button.h" />
   </ItemGroup>
 </Project>

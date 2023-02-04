@@ -4,7 +4,7 @@ void Player::handleInput()
 {
 	idleAnimations = true;
 	runningAnimations = false;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Joystick::getAxisPosition(0, sf::Joystick::X) > 20)
 	{
 		left = false;
 		PlayerPos.x += XSpeed;
@@ -16,7 +16,7 @@ void Player::handleInput()
 			PlayerPos.x = 1912;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Joystick::getAxisPosition(0, sf::Joystick::X) < -20)
 	{
 		left = true;
 		PlayerPos.x -= XSpeed;
@@ -28,12 +28,17 @@ void Player::handleInput()
 			PlayerPos.x = 8;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&currentlyJumping == false)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && currentlyJumping == false)
 	{
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	if (sf::Joystick::isButtonPressed(0, 0) && currentlyJumping == false)
+	{
+		currentlyJumping = true;
+		velocityY = -maxJumpVelocity;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) || (sf::Joystick::getAxisPosition(0,sf::Joystick::Z) < -50))
 	{
 		attackAnimation = true;
 	}
@@ -71,6 +76,7 @@ void Player::init()
 	timeLeft.setPosition(1600, 1);
 
 	levelCountdown = 3600;
+	button1.init();
 }
 
 void Player::playerHearts()
@@ -172,6 +178,7 @@ void Player::render(sf::RenderWindow& m_window)
 	m_window.draw(firstEnemy.EnemySprite);
 	m_window.draw(heartSprite);
 	m_window.draw(timeLeft);
+	button1.render(m_window);
 }
 
 void Player::snapRelicToHand()
@@ -198,6 +205,10 @@ void Player::enemyCollisions()
 	{
 		firstEnemy.enemyIsAlive = false;
 		lives++;
+	}
+	if (PlayerSprite.getGlobalBounds().intersects(button1.button.getGlobalBounds()) && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		timeRelic.randomPos();
 	}
 }
 void Player::keepPlayerOnBlock(float t_blockYPos)

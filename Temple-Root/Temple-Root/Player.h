@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Relic.h"
 #include "Enemy.h"
+#include "Button.h"
 
 class Player {
 public:
@@ -17,6 +18,7 @@ public:
 	void keepPlayerOnBlock(float t_blockXPos);
 	void hitWalls(float t_blockXPos);
 	bool playerIsAttacking();
+
 private:
 	int runningAnimations = false;
 	int idleAnimations = true;
@@ -46,6 +48,7 @@ private:
 
 	Relic timeRelic;
 	Enemy firstEnemy;
+	Button button1;
 
 	void jump();
 
