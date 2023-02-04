@@ -28,7 +28,10 @@ private:
 	int attackCurrentFrame = 0;
 	int maxAttackAnimation = 6;
 
+	sf::Font pixelFont;
+	sf::Text timeLeft;
 	
+	int levelCountdown;
 
 	bool currentlyOnBlock = false;
 
@@ -67,7 +70,7 @@ private:
 	int animationMaxFrame = 7;
 
 	sf::Texture PlayerTexture;
-	sf::Vector2f PlayerPos = {500,100};
+	sf::Vector2f PlayerPos = {48,500};
 
 	float XSpeed = 5.0f;
 };
