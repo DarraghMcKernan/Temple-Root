@@ -11,9 +11,12 @@ public:
 	void movement();
 	void update();
 
+	bool enemyIsAlive = true;
+
 private:
-	sf::Vector2f enemyPosition {900,500};
+	sf::Vector2f enemyPosition {900,1000};
 	sf::Texture EnemyTexture;
+	sf::Texture DeadEnemyTexture;
 	bool backwards = false;
 
 	int animationTimer = 0;
