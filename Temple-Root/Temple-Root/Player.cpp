@@ -4,7 +4,7 @@ void Player::handleInput()
 {
 	idleAnimations = true;
 	runningAnimations = false;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		left = false;
 		PlayerPos.x += XSpeed;
@@ -16,7 +16,7 @@ void Player::handleInput()
 			PlayerPos.x = 1912;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		left = true;
 		PlayerPos.x -= XSpeed;
@@ -143,6 +143,7 @@ void Player::update()
 	timeRelic.update();
 	snapRelicToHand();
 	firstEnemy.update();
+	firstEnemy.movement(850, 1200, 750);
 	enemyCollisions();
 	playerHearts();
 	

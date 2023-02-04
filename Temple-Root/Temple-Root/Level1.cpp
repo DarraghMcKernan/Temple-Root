@@ -9,10 +9,14 @@ void Level1::init()
 	wallPieces.setTexture(floorTexture);
 	wallPieces.setScale(2, 2);
 	wallPieces.rotate(-90);
+
+	//myEnemy.init();
 }
 
 sf::Vector2f Level1::render(sf::RenderWindow& m_window, sf::Sprite t_player)
 {
+	//m_window.draw(myEnemy.EnemySprite);
+
 	for (int index = 0; index < floorAmount; index++)
 	{
 		floorPieces.setPosition(xCoords[index], yCoords[index]);
@@ -50,9 +54,11 @@ sf::Vector2f Level1::handleWallCollisions(sf::Sprite t_player)
 
 void Level1::update()
 {
-
+	//myEnemy.update();
+	handleAI();
 }
 
 void Level1::handleAI()
 {
+	//myEnemy.movement(850,1200,750);
 }

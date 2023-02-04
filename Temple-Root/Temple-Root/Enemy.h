@@ -8,7 +8,7 @@ public:
 	// temp
 	sf::RectangleShape enemy;
 	void init();
-	void movement();
+	void movement(int t_min,int t_max,int t_yPos);
 	void update();
 
 	bool enemyIsAlive = true;
