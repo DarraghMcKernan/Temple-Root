@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Relic.cpp" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Level1.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Relic.h" />
   </ItemGroup>
