@@ -77,8 +77,8 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);//clears the screen and sets a background colour
+	myPlayer.render(m_window);
 	m_window.draw(backgroundSprite);
-	m_window.draw(myPlayer.PlayerSprite);
 	m_window.draw(firstEnemy.EnemySprite);
 	m_window.display();//shows evrything on screen (important)
 }

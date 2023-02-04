@@ -37,6 +37,7 @@ void Player::init()
 	PlayerSprite.setTextureRect(sf::IntRect(0, 0, 17, 22));	//16 22
 	PlayerSprite.setOrigin(8, 0);
 	PlayerSprite.setScale(3, 3);
+	timeRelic.init();
 }
 
 void Player::jump()
@@ -78,7 +79,24 @@ void Player::update()
 		}
 		handleAnimations();
 	}
-
+	timeRelic.update();
+	snapRelicToHand();
 
 	PlayerSprite.setPosition(PlayerPos);
+}
+
+void Player::render(sf::RenderWindow& m_window)
+{
+	m_window.draw(PlayerSprite);
+	timeRelic.render(m_window);
+}
+
+void Player::snapRelicToHand()
+{
+	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicTemp.getGlobalBounds()))
+	{
+		/*timeRelic.relicPos.x = PlayerPos.x += 20;
+		timeRelic.relicPos.y = PlayerPos.y;*/
+		timeRelic.relicPos = PlayerPos;
+	}
 }
