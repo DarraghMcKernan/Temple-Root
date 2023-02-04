@@ -16,9 +16,17 @@ public:
 	void enemyCollisions();
 	void keepPlayerOnBlock(float t_blockXPos);
 	void hitWalls(float t_blockXPos);
+	bool playerIsAttacking();
 private:
 	int runningAnimations = false;
 	int idleAnimations = true;
+	bool attackAnimation = false;
+
+	int attackTimer = 10;
+	int attackCurrentFrame = 1;
+	int maxAttackAnimation = 6;
+
+	bool enemyIsAlive = true;
 
 	bool currentlyOnBlock = false;
 

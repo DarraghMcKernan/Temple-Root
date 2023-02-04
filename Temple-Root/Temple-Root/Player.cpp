@@ -4,7 +4,7 @@ void Player::handleInput()
 {
 	idleAnimations = true;
 	runningAnimations = false;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		left = false;
 		PlayerPos.x += XSpeed;
@@ -16,7 +16,7 @@ void Player::handleInput()
 			PlayerPos.x = 1912;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		left = true;
 		PlayerPos.x -= XSpeed;
@@ -32,6 +32,10 @@ void Player::handleInput()
 	{
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		attackAnimation = true;
 	}
 	PlayerSprite.setPosition(PlayerPos);
 }
@@ -97,6 +101,21 @@ void Player::handleAnimations()
 	{
 		PlayerSprite.setTextureRect(sf::IntRect(130, 30, 18, 25));
 	}
+	if (attackAnimation == true)
+	{
+		PlayerSprite.setTextureRect(sf::IntRect((64 * animationCurrentFrame), 96, 36, 22));
+		attackTimer++;
+		if (attackTimer >= animationMaxSpeed)
+		{
+			animationTimer = 0;
+			attackCurrentFrame++;
+			if (attackCurrentFrame >= maxAttackAnimation)
+			{
+				attackCurrentFrame = 0;
+				attackAnimation = false;
+			}
+		}
+	}
 }
 
 void Player::update()
@@ -150,14 +169,17 @@ void Player::snapRelicToHand()
 
 void Player::enemyCollisions()
 {
-	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()))
+	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && enemyIsAlive == true)
 	{
 		if (healthLossTimer <= 0)
 		{
 			lives--;
 			healthLossTimer = 120;
 		}
-		
+	}
+	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && playerIsAttacking())
+	{
+		enemyIsAlive = false;
 	}
 }
 void Player::keepPlayerOnBlock(float t_blockYPos)
@@ -185,3 +207,12 @@ void Player::hitWalls(float t_blockXPos)
 	else PlayerPos.x = t_blockXPos -24;
 	PlayerSprite.setPosition(PlayerPos);
 }
+bool Player::playerIsAttacking()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		return true;
+	}
+	return false;
+}
+
