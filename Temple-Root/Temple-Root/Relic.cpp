@@ -42,3 +42,9 @@ void Relic::handleAnimation()
 		relicSprite.setTextureRect(sf::IntRect((16 * animationCurrentFrame), 0, 16, 16));//16 22
 	}
 }
+
+void Relic::randomPos()
+{
+	relicPos.x = rand() % 1920;
+	relicPos.y = rand() % 1080;
+}
