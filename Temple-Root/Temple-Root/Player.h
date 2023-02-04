@@ -23,10 +23,10 @@ private:
 	bool attackAnimation = false;
 
 	int attackTimer = 10;
-	int attackCurrentFrame = 1;
+	int attackCurrentFrame = 0;
 	int maxAttackAnimation = 6;
 
-	bool enemyIsAlive = true;
+	
 
 	bool currentlyOnBlock = false;
 

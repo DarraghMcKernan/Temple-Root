@@ -103,7 +103,7 @@ void Player::handleAnimations()
 	}
 	if (attackAnimation == true)
 	{
-		PlayerSprite.setTextureRect(sf::IntRect((64 * animationCurrentFrame), 96, 36, 22));
+		
 		attackTimer++;
 		if (attackTimer >= animationMaxSpeed)
 		{
@@ -115,6 +115,7 @@ void Player::handleAnimations()
 				attackAnimation = false;
 			}
 		}
+		PlayerSprite.setTextureRect(sf::IntRect((64 * attackCurrentFrame), 96, 36, 22));
 	}
 }
 
@@ -170,7 +171,7 @@ void Player::snapRelicToHand()
 
 void Player::enemyCollisions()
 {
-	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && enemyIsAlive == true)
+	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && firstEnemy.enemyIsAlive == true && !playerIsAttacking())
 	{
 		if (healthLossTimer <= 0)
 		{
@@ -180,7 +181,7 @@ void Player::enemyCollisions()
 	}
 	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && playerIsAttacking())
 	{
-		enemyIsAlive = false;
+		firstEnemy.enemyIsAlive = false;
 	}
 }
 void Player::keepPlayerOnBlock(float t_blockYPos)
