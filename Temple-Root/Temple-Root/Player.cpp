@@ -62,6 +62,15 @@ void Player::init()
 	heartSprite.setScale(5, 5);
 	timeRelic.init();
 	firstEnemy.init();
+
+	if(!pixelFont.loadFromFile("ASSETS/FONTS/Minecraft.ttf"))
+	{ }
+	timeLeft.setFont(pixelFont);
+	timeLeft.setCharacterSize(50);
+	timeLeft.setFillColor(sf::Color::White);
+	timeLeft.setPosition(1600, 1);
+
+	levelCountdown = 3600;
 }
 
 void Player::playerHearts()
@@ -150,8 +159,9 @@ void Player::update()
 	firstEnemy.update();
 	enemyCollisions();
 	playerHearts();
-	
-
+	levelCountdown--;
+	int seconds = levelCountdown / 60;
+	timeLeft.setString("Time left: "+std::to_string(seconds));
 	PlayerSprite.setPosition(PlayerPos);
 }
 
@@ -161,6 +171,7 @@ void Player::render(sf::RenderWindow& m_window)
 	timeRelic.render(m_window);
 	m_window.draw(firstEnemy.EnemySprite);
 	m_window.draw(heartSprite);
+	m_window.draw(timeLeft);
 }
 
 void Player::snapRelicToHand()
