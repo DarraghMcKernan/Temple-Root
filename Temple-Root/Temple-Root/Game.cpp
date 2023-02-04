@@ -64,7 +64,11 @@ void Game::init()
 void Game::update(sf::Time t_deltaTime)
 {
 	myPlayer.handleInput();//used for player movement
-	
+	sf::Vector2f wallHit = firstLevel.handleWallCollisions(myPlayer.PlayerSprite);
+	if (wallHit != sf::Vector2f(0, 0))
+	{
+		myPlayer.hitWalls(wallHit.x);
+	}
 	myPlayer.update();
 	firstLevel.update();
 	if (m_exitGame)

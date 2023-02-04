@@ -15,6 +15,7 @@ public:
 	void snapRelicToHand();
 	void enemyCollisions();
 	void keepPlayerOnBlock(float t_blockXPos);
+	void hitWalls(float t_blockXPos);
 	bool playerIsAttacking();
 private:
 	int runningAnimations = false;
@@ -26,6 +27,12 @@ private:
 	int maxAttackAnimation = 6;
 
 	bool enemyIsAlive = true;
+
+	bool currentlyOnBlock = false;
+
+	int jumpCounter = 10;
+
+	bool left = true;
 
 	int lives = 3;
 	//hearts

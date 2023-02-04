@@ -6,17 +6,27 @@ void Player::handleInput()
 	runningAnimations = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
+		left = false;
 		PlayerPos.x += XSpeed;
 		PlayerSprite.setScale(3, 3);
 		runningAnimations = true;
 		idleAnimations = false;
+		if (PlayerPos.x >= 1912)
+		{
+			PlayerPos.x = 1912;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
+		left = true;
 		PlayerPos.x -= XSpeed;
 		PlayerSprite.setScale(-3, 3);
 		runningAnimations = true;
 		idleAnimations = false;
+		if (PlayerPos.x <= 8)
+		{
+			PlayerPos.x = 8;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&currentlyJumping == false)
 	{
@@ -71,7 +81,7 @@ void Player::jump()
 	velocityY = velocityY + gravity;
 	PlayerPos.y += velocityY;
 	gravity = 0.6;
-	if (velocityY >= maxJumpVelocity)
+	if (velocityY > 0.01)
 	{
 		currentlyJumping = false;
 	}
@@ -115,7 +125,7 @@ void Player::update()
 	}
 	if (currentlyJumping == false)
 	{
-		PlayerPos.y += 15;
+		PlayerPos.y += 10;
 	}
 	animationTimer++;
 	if (animationTimer >= animationMaxSpeed)
@@ -172,12 +182,31 @@ void Player::enemyCollisions()
 		enemyIsAlive = false;
 	}
 }
-void Player::keepPlayerOnBlock(float t_blockXPos)
+void Player::keepPlayerOnBlock(float t_blockYPos)
 {
-	PlayerPos.y = t_blockXPos-64;
+	if (currentlyJumping == true)
+	{
+		PlayerPos.y = t_blockYPos + 64;
+	}
+	else{
+
+		PlayerPos.y = t_blockYPos - 64;
+	}
+	currentlyJumping = false;
+
 	PlayerSprite.setPosition(PlayerPos.x, PlayerPos.y);
+	
 }
 
+void Player::hitWalls(float t_blockXPos)
+{
+	if (left == true)
+	{
+		PlayerPos.x = t_blockXPos+84;
+	}
+	else PlayerPos.x = t_blockXPos -24;
+	PlayerSprite.setPosition(PlayerPos);
+}
 bool Player::playerIsAttacking()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
