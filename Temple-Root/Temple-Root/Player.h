@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Relic.h"
+#include "Enemy.h"
 
 class Player {
 public:
@@ -12,12 +13,21 @@ public:
 	void update();
 	void render(sf::RenderWindow& m_window);
 	void snapRelicToHand();
+	void enemyCollisions();
 	void keepPlayerOnBlock(float t_blockXPos);
 private:
 	int runningAnimations = false;
 	int idleAnimations = true;
 
+	int lives = 3;
+	//hearts
+	sf::Texture heartTexture;
+	sf::Sprite heartSprite;
+	void playerHearts();
+	int healthLossTimer = 120;
+
 	Relic timeRelic;
+	Enemy firstEnemy;
 
 	void jump();
 

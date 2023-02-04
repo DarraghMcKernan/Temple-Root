@@ -20,7 +20,6 @@ private:
 	void render();
 
 	Player myPlayer;
-	Enemy firstEnemy;
 	Level1 firstLevel;
 	bool m_exitGame = false;
 

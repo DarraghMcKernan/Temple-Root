@@ -52,7 +52,6 @@ void Game::processKeys(sf::Event t_event)
 void Game::init()
 {
 	myPlayer.init();
-	firstEnemy.init();
 	firstLevel.init();
 
 	if(!backgroundTexture.loadFromFile("ASSETS/IMAGES/StoneTiles.png"))
@@ -65,8 +64,7 @@ void Game::init()
 void Game::update(sf::Time t_deltaTime)
 {
 	myPlayer.handleInput();//used for player movement
-	firstEnemy.movement();
-	firstEnemy.update();
+	
 	myPlayer.update();
 	firstLevel.update();
 	if (m_exitGame)
@@ -85,7 +83,6 @@ void Game::render()
 	{
 		myPlayer.keepPlayerOnBlock(playerStandHere.y);
 	}
-	m_window.draw(firstEnemy.EnemySprite);
 	myPlayer.render(m_window);
 	m_window.display();//shows evrything on screen (important)
 }

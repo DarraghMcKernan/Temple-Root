@@ -37,7 +37,29 @@ void Player::init()
 	PlayerSprite.setTextureRect(sf::IntRect(0, 0, 17, 22));	//16 22
 	PlayerSprite.setOrigin(8, 0);
 	PlayerSprite.setScale(3, 3);
+
+	// heart
+	if (!heartTexture.loadFromFile("ASSETS/IMAGES/heart-spritesheet.png"))
+	{
+		std::cout << "error loading hearts" << "\n";
+	}
+	heartSprite.setTexture(heartTexture);
+	heartSprite.setTextureRect(sf::IntRect(0, 0, 48, 16));
+	heartSprite.setScale(5, 5);
 	timeRelic.init();
+	firstEnemy.init();
+}
+
+void Player::playerHearts()
+{
+	if (lives == 2)
+	{
+		heartSprite.setTextureRect(sf::IntRect(0, 0, 32, 16));
+	}
+	else if (lives == 1)
+	{
+		heartSprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	}
 }
 
 void Player::jump()
@@ -88,8 +110,13 @@ void Player::update()
 		}
 		handleAnimations();
 	}
+	healthLossTimer--;
 	timeRelic.update();
 	snapRelicToHand();
+	firstEnemy.update();
+	enemyCollisions();
+	playerHearts();
+	
 
 	PlayerSprite.setPosition(PlayerPos);
 }
@@ -98,6 +125,8 @@ void Player::render(sf::RenderWindow& m_window)
 {
 	m_window.draw(PlayerSprite);
 	timeRelic.render(m_window);
+	m_window.draw(firstEnemy.EnemySprite);
+	m_window.draw(heartSprite);
 }
 
 void Player::snapRelicToHand()
@@ -110,8 +139,21 @@ void Player::snapRelicToHand()
 	}
 }
 
+void Player::enemyCollisions()
+{
+	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()))
+	{
+		if (healthLossTimer <= 0)
+		{
+			lives--;
+			healthLossTimer = 120;
+		}
+		
+	}
+}
 void Player::keepPlayerOnBlock(float t_blockXPos)
 {
 	PlayerPos.y = t_blockXPos-64;
 	PlayerSprite.setPosition(PlayerPos.x, PlayerPos.y);
 }
+
