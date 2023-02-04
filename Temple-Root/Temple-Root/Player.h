@@ -12,6 +12,7 @@ public:
 	void update();
 	void render(sf::RenderWindow& m_window);
 	void snapRelicToHand();
+	void keepPlayerOnBlock(float t_blockXPos);
 private:
 	int runningAnimations = false;
 	int idleAnimations = true;
@@ -38,7 +39,7 @@ private:
 	int animationMaxFrame = 7;
 
 	sf::Texture PlayerTexture;
-	sf::Vector2f PlayerPos = {500,500};
+	sf::Vector2f PlayerPos = {500,100};
 
 	float XSpeed = 5.0f;
 };

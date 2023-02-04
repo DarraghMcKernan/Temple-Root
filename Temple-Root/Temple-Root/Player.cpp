@@ -61,12 +61,21 @@ void Player::handleAnimations()
 	{
 		PlayerSprite.setTextureRect(sf::IntRect((64 * animationCurrentFrame), 29, 18, 25));//16 22
 	}
+	if (currentlyJumping == true)
+	{
+		PlayerSprite.setTextureRect(sf::IntRect(130, 30, 18, 25));
+	}
 }
 
 void Player::update()
 {
 	if (currentlyJumping == true) {
 		jump();
+	}
+	if (currentlyJumping == false)
+	{
+		velocityY = velocityY + gravity;
+		PlayerPos.y += velocityY;
 	}
 	animationTimer++;
 	if (animationTimer >= animationMaxSpeed)
@@ -99,4 +108,10 @@ void Player::snapRelicToHand()
 		timeRelic.relicPos.y = PlayerPos.y;*/
 		timeRelic.relicPos = PlayerPos;
 	}
+}
+
+void Player::keepPlayerOnBlock(float t_blockXPos)
+{
+	PlayerPos.y = t_blockXPos-64;
+	PlayerSprite.setPosition(PlayerPos.x, PlayerPos.y);
 }
