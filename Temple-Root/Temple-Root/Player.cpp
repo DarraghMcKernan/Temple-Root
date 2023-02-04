@@ -96,8 +96,7 @@ void Player::update()
 	}
 	if (currentlyJumping == false)
 	{
-		velocityY = velocityY + gravity;
-		PlayerPos.y += velocityY;
+		PlayerPos.y += 15;
 	}
 	animationTimer++;
 	if (animationTimer >= animationMaxSpeed)
