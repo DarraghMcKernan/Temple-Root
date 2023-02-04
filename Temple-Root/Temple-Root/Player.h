@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Relic.h"
 
 class Player {
 public:
@@ -9,9 +10,13 @@ public:
 	void handleInput();
 	void init();
 	void update();
+	void render(sf::RenderWindow& m_window);
+	void snapRelicToHand();
 private:
 	int runningAnimations = false;
 	int idleAnimations = true;
+
+	Relic timeRelic;
 
 	void jump();
 
