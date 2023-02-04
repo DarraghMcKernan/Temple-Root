@@ -4,7 +4,6 @@
 #include <iostream>
 #include "Player.h"
 #include "Relic.h"
-#include "Enemy.h"
 
 
 class Game {
@@ -19,7 +18,7 @@ private:
 	void render();
 
 	Player myPlayer;
-	Enemy firstEnemy;
+	
 	bool m_exitGame = false;
 
 	sf::Sprite backgroundSprite;

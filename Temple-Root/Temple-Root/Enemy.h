@@ -12,7 +12,7 @@ public:
 	void update();
 
 private:
-	sf::Vector2f enemyPosition {100,100};
+	sf::Vector2f enemyPosition {900,500};
 	sf::Texture EnemyTexture;
 	bool backwards = false;
 
