@@ -10,6 +10,8 @@ public:
 	void init();
 	void update();
 private:
+	int runningAnimations = false;
+	int idleAnimations = true;
 
 	void jump();
 
@@ -28,7 +30,7 @@ private:
 	int animationTimer = 0;
 	int animationMaxSpeed = 10;
 	int animationCurrentFrame = 0;
-	int animationMaxFrame = 8;
+	int animationMaxFrame = 7;
 
 	sf::Texture PlayerTexture;
 	sf::Vector2f PlayerPos = {500,500};

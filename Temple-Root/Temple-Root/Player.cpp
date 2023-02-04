@@ -2,15 +2,21 @@
 
 void Player::handleInput()
 {
+	idleAnimations = true;
+	runningAnimations = false;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		PlayerPos.x += XSpeed;
 		PlayerSprite.setScale(3, 3);
+		runningAnimations = true;
+		idleAnimations = false;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		PlayerPos.x -= XSpeed;
 		PlayerSprite.setScale(-3, 3);
+		runningAnimations = true;
+		idleAnimations = false;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)&&currentlyJumping == false)
 	{
@@ -46,7 +52,14 @@ void Player::jump()
 
 void Player::handleAnimations()
 {
-	PlayerSprite.setTextureRect(sf::IntRect((64 * animationCurrentFrame), 0, 17, 22));//16 22
+	if (idleAnimations == true)
+	{
+		PlayerSprite.setTextureRect(sf::IntRect((64 * animationCurrentFrame), 0, 17, 22));//16 22
+	}
+	if (runningAnimations == true)
+	{
+		PlayerSprite.setTextureRect(sf::IntRect((64 * animationCurrentFrame), 29, 18, 25));//16 22
+	}
 }
 
 void Player::update()
