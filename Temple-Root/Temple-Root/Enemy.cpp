@@ -67,6 +67,6 @@ void Enemy::update()
 		EnemySprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
 	}
 	else {
-		movement();
+		//movement(850,1200,750);
 	}
 }

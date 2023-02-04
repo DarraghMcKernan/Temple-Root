@@ -142,8 +142,12 @@ void Player::update()
 	healthLossTimer--;
 	timeRelic.update();
 	snapRelicToHand();
+	if (firstEnemy.enemyIsAlive == true)
+	{
+		
+		firstEnemy.movement(850, 1200, 750);
+	}
 	firstEnemy.update();
-	firstEnemy.movement(850, 1200, 750);
 	enemyCollisions();
 	playerHearts();
 	
@@ -182,6 +186,7 @@ void Player::enemyCollisions()
 	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && playerIsAttacking())
 	{
 		firstEnemy.enemyIsAlive = false;
+		lives++;
 	}
 }
 void Player::keepPlayerOnBlock(float t_blockYPos)
