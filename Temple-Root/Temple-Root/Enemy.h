@@ -9,10 +9,17 @@ public:
 	sf::RectangleShape enemy;
 	void init();
 	void movement();
+	void update();
 
 private:
 	sf::Vector2f enemyPosition {100,100};
 	sf::Texture EnemyTexture;
 	bool backwards = false;
+
+	int animationTimer = 0;
+	int animationMaxSpeed = 10;
+	int animationCurrentFrame = 0;
+	int animationMaxFrame = 4;
+	bool runningAnimations = true;
 
 };

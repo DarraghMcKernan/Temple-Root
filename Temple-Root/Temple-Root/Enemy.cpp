@@ -2,9 +2,14 @@
 
 void Enemy::init()
 {
-	enemy.setSize(sf::Vector2f{ 50, 50 });
-	enemy.setFillColor(sf::Color::Green);
-	enemy.setPosition(enemyPosition);
+	if (!EnemyTexture.loadFromFile("ASSETS/IMAGES/enemy-Sheet.png"))
+	{
+		std::cout << "problem loading texture";
+	}
+	EnemySprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	EnemySprite.setTexture(EnemyTexture);
+	EnemySprite.setScale(3,3);
+	EnemySprite.setPosition(enemyPosition);
 }
 
 void Enemy::movement()
@@ -12,6 +17,7 @@ void Enemy::movement()
 	if (enemyPosition.x >= 100 && enemyPosition.x <= 200 && backwards == false)
 	{
 		enemyPosition.x++;
+		EnemySprite.setScale(-3, 3);
 
 		if (enemyPosition.x >= 200)
 		{
@@ -21,10 +27,31 @@ void Enemy::movement()
 	if (enemyPosition.x >= 100 && enemyPosition.x <= 200 && backwards == true)
 	{
 		enemyPosition.x--;
+		EnemySprite.setScale(3, 3);
 		if (enemyPosition.x <= 100)
 		{
 			backwards = false;
 		}
 	}
-	enemy.setPosition(enemyPosition);
+	EnemySprite.setPosition(enemyPosition);
+}
+
+void Enemy::update()
+{
+	animationTimer++;
+	if (animationTimer >= animationMaxSpeed)
+	{
+		animationTimer = 0;
+		animationCurrentFrame++;
+		if (animationCurrentFrame >= animationMaxFrame)
+		{
+			animationCurrentFrame = 0;
+		}
+		if (runningAnimations == true)
+		{
+			EnemySprite.setTextureRect(sf::IntRect((16 * animationCurrentFrame), 0, 16, 16));//16 22
+		}
+	
+	}
+	EnemySprite.setPosition(enemyPosition);
 }
