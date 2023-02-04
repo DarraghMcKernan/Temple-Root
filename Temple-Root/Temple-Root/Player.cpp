@@ -4,14 +4,14 @@ void Player::handleInput()
 {
 	idleAnimations = true;
 	runningAnimations = false;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		PlayerPos.x += XSpeed;
 		PlayerSprite.setScale(3, 3);
 		runningAnimations = true;
 		idleAnimations = false;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		PlayerPos.x -= XSpeed;
 		PlayerSprite.setScale(-3, 3);
@@ -140,19 +140,31 @@ void Player::snapRelicToHand()
 
 void Player::enemyCollisions()
 {
-	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()))
+	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && enemyIsAlive == true)
 	{
 		if (healthLossTimer <= 0)
 		{
 			lives--;
 			healthLossTimer = 120;
 		}
-		
+	}
+	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && playerIsAttacking())
+	{
+		enemyIsAlive = false;
 	}
 }
 void Player::keepPlayerOnBlock(float t_blockXPos)
 {
 	PlayerPos.y = t_blockXPos-64;
 	PlayerSprite.setPosition(PlayerPos.x, PlayerPos.y);
+}
+
+bool Player::playerIsAttacking()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		return true;
+	}
+	return false;
 }
 
