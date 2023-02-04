@@ -93,7 +93,7 @@ void Player::render(sf::RenderWindow& m_window)
 
 void Player::snapRelicToHand()
 {
-	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicTemp.getGlobalBounds()))
+	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicSprite.getGlobalBounds()))
 	{
 		/*timeRelic.relicPos.x = PlayerPos.x += 20;
 		timeRelic.relicPos.y = PlayerPos.y;*/
