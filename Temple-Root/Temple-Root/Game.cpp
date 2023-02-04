@@ -31,11 +31,13 @@ void Game::run()
 void Game::init()
 {
 	myPlayer.init();
+	firstEnemy.init();
 }
 
 void Game::update(sf::Time t_deltaTime)
 {
 	myPlayer.handleInput();//used for player movement
+	firstEnemy.movement();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
@@ -47,5 +49,6 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);//clears the screen and sets a background colour
 	m_window.draw(myPlayer.PlayerSprite);
+	m_window.draw(firstEnemy.enemy);
 	m_window.display();//shows evrything on screen (important)
 }
