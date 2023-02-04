@@ -19,6 +19,10 @@ private:
 	int runningAnimations = false;
 	int idleAnimations = true;
 
+	bool currentlyOnBlock = false;
+
+	int jumpCounter = 10;
+
 	int lives = 3;
 	//hearts
 	sf::Texture heartTexture;
