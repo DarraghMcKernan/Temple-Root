@@ -40,6 +40,8 @@ private:
 
 	bool currentlyOnBlock = false;
 
+	bool holdingRelic = false;
+
 	int jumpCounter = 10;
 
 	bool left = true;
@@ -50,6 +52,9 @@ private:
 	sf::Sprite heartSprite;
 	void playerHearts();
 	int healthLossTimer = 120;
+
+	sf::Sprite pedestal;
+	sf::Texture pedestalTexture;
 
 	Relic timeRelic;
 	Enemy firstEnemy;
@@ -75,8 +80,8 @@ private:
 	int animationMaxFrame = 7;
 
 	sf::Texture PlayerTexture;
-	sf::Vector2f PlayerPos = { 48,500 };
-	sf::Vector2f spawnPos = { 48,500 };
+	sf::Vector2f PlayerPos = { 24,500 };
+	sf::Vector2f spawnPos = { 24,500 };
 
 	float XSpeed = 5.0f;
 };

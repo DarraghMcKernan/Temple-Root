@@ -48,7 +48,7 @@ void Player::handleInput()
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
 	{
 		attackAnimation = true;
 	}
@@ -63,6 +63,7 @@ void Player::init()
 {
 	if (!PlayerTexture.loadFromFile("ASSETS/IMAGES/ArchaeologistSpriteSheet.png"))
 	{
+		std::cout << "error loading player\n";
 	}
 	PlayerSprite.setTexture(PlayerTexture);
 	PlayerSprite.setScale(0.25, 0.25);
@@ -74,7 +75,7 @@ void Player::init()
 	// heart
 	if (!heartTexture.loadFromFile("ASSETS/IMAGES/heart-spritesheet.png"))
 	{
-		std::cout << "error loading hearts" << "\n";
+		std::cout << "error loading hearts \n";
 	}
 	heartSprite.setTexture(heartTexture);
 	heartSprite.setTextureRect(sf::IntRect(0, 0, 48, 16));
@@ -83,7 +84,9 @@ void Player::init()
 	firstEnemy.init();
 
 	if(!pixelFont.loadFromFile("ASSETS/FONTS/Minecraft.ttf"))
-	{ }
+	{
+		std::cout << "error loading font\n";
+	}
 	timeLeft.setFont(pixelFont);
 	timeLeft.setCharacterSize(50);
 	timeLeft.setFillColor(sf::Color::White);
@@ -101,6 +104,14 @@ void Player::init()
 
 	levelCountdown = maxTime; //3600;
 	button1.init();
+
+	if(!pedestalTexture.loadFromFile("ASSETS/IMAGES/pillar.png"))
+	{
+		std::cout << "error loading pillar\n";
+	}
+	pedestal.setTexture(pedestalTexture);
+	pedestal.setScale(3, 3);
+	pedestal.setPosition(80, 525);
 }
 
 void Player::playerHearts()
@@ -214,12 +225,14 @@ void Player::update()
 
 void Player::render(sf::RenderWindow& m_window)
 {
+	m_window.draw(pedestal);
 	m_window.draw(PlayerSprite);
 	timeRelic.render(m_window);
 	m_window.draw(firstEnemy.EnemySprite);
 	m_window.draw(heartSprite);
 	m_window.draw(timeLeft);
 	button1.render(m_window);
+
 	if ((levelCountdown / 60) > 3)
 	{
 		endScreen.setFillColor(sf::Color(0, 0, 0, 0));
@@ -243,10 +256,20 @@ void Player::render(sf::RenderWindow& m_window)
 
 void Player::snapRelicToHand()
 {
-	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicSprite.getGlobalBounds()))
+	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicSprite.getGlobalBounds())&&(sf::Keyboard::isKeyPressed(sf::Keyboard::E)))
 	{
+		holdingRelic = true;
 		/*timeRelic.relicPos.x = PlayerPos.x += 20;
 		timeRelic.relicPos.y = PlayerPos.y;*/
+		
+	}
+	if (PlayerSprite.getGlobalBounds().intersects(pedestal.getGlobalBounds())&&holdingRelic == true)
+	{
+		holdingRelic = false;
+		timeRelic.relicPos = sf::Vector2f(108, 515);
+	}
+	if (holdingRelic == true)
+	{
 		timeRelic.relicPos = PlayerPos;
 	}
 }
