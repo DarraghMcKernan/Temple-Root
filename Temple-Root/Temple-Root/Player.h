@@ -41,6 +41,8 @@ private:
 
 	bool currentlyOnBlock = false;
 
+	bool allowedToJump = true;
+
 	bool holdingRelic = false;
 
 	int jumpCounter = 10;
