@@ -33,7 +33,7 @@ void Player::handleInput()
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) || sf::Joystick::isButtonPressed(0, 3))
 	{
 		if (levelCountdown <=0)
 		{
@@ -48,7 +48,11 @@ void Player::handleInput()
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) || (sf::Joystick::getAxisPosition(0,sf::Joystick::Z) < -50))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		attackAnimation = true;
+	}
+	if ((sf::Joystick::getAxisPosition(0, sf::Joystick::Z) < -50))
 	{
 		attackAnimation = true;
 	}

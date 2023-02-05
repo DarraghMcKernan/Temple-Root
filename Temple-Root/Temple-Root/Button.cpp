@@ -6,6 +6,11 @@ void Button::init()
 	button.setFillColor(sf::Color::Red);
 	button.setOrigin(10, 10);
 	button.setPosition(buttonPos);
+
+	if (!buttonTexture.loadFromFile("ASSETS/IMAGES/button-sheet.png"))
+	{
+		std::cout << "error loading buttons" << "\n";
+	}
 }
 
 void Button::update()
