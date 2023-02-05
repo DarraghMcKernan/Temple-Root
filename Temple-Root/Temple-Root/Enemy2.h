@@ -18,6 +18,7 @@ public:
 	bool enemyIsAlive = true;
 
 	sf::Texture EnemyTexture2;
+	sf::Texture DeadEnemy2;
 
 private:
 	sf::Vector2f enemyPosition2{ 220,1000 };

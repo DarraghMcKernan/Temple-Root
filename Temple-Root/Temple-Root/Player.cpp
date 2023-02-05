@@ -87,6 +87,15 @@ void Player::init()
 	PlayerSprite.setOrigin(8, 0);
 	PlayerSprite.setScale(3, 3);
 
+	//tree 
+	if (!treeTexture.loadFromFile("ASSETS/IMAGES/tree.png"))
+	{
+		std::cout << "error loading tree" << "\n";
+	}
+	treeSprite.setTexture(treeTexture);
+	treeSprite.setPosition(1500, 630);
+	treeSprite.setScale(2, 2);
+
 	// heart
 	if (!heartTexture.loadFromFile("ASSETS/IMAGES/heart-spritesheet.png"))
 	{
