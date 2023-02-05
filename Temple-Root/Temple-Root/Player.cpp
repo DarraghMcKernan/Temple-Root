@@ -346,42 +346,51 @@ void Player::enemyCollisions()
 	}
 	if (PlayerSprite.getGlobalBounds().intersects(button1.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
-		if (button1.buttonPressed == false)
+		if (timeRelic.relicPos == sf::Vector2f(108, 515))
 		{
-			button1.isAnimating = true;
-			if (relicTimer <= 0)
+			if (button1.buttonPressed == false)
 			{
-				timeRelic.randomPos();
-				relicTimer = 120;
+				button1.isAnimating = true;
+				if (relicTimer <= 0)
+				{
+					timeRelic.randomPos();
+					relicTimer = 120;
+				}
 			}
+			button1.buttonPressed = true;
 		}
-		button1.buttonPressed = true;
 	}
 	if (PlayerSprite.getGlobalBounds().intersects(button2.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
-		if (button2.buttonPressed == false)
+		if (timeRelic.relicPos == sf::Vector2f(108, 515))
 		{
-			button2.isAnimating = true;
-			if (relicTimer <= 0)
+			if (button2.buttonPressed == false)
 			{
-				timeRelic.randomPos();
-				relicTimer = 120;
+				button2.isAnimating = true;
+				if (relicTimer <= 0)
+				{
+					timeRelic.randomPos();
+					relicTimer = 120;
+				}
 			}
+			button2.buttonPressed = true;
 		}
-		button2.buttonPressed = true;
 	}
 	if (PlayerSprite.getGlobalBounds().intersects(button3.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
-		if (button3.buttonPressed == false)
+		if (timeRelic.relicPos == sf::Vector2f(108, 515))
 		{
-			button3.isAnimating = true;
-			if (relicTimer <= 0)
+			if (button3.buttonPressed == false)
 			{
-				timeRelic.randomPos();
-				relicTimer = 120;
+				button3.isAnimating = true;
+				if (relicTimer <= 0)
+				{
+					timeRelic.randomPos();
+					relicTimer = 120;
+				}
 			}
+			button3.buttonPressed = true;
 		}
-		button3.buttonPressed = true;
 	}
 		
 }
