@@ -82,6 +82,7 @@ void Player::init()
 	heartSprite.setScale(5, 5);
 	timeRelic.init();
 	firstEnemy.init();
+	secondEnemy.init();
 
 	if(!pixelFont.loadFromFile("ASSETS/FONTS/Minecraft.ttf"))
 	{
@@ -104,6 +105,7 @@ void Player::init()
 
 	levelCountdown = maxTime; //3600;
 	button1.init();
+	
 
 	if(!pedestalTexture.loadFromFile("ASSETS/IMAGES/pillar.png"))
 	{
@@ -209,10 +211,14 @@ void Player::update()
 	snapRelicToHand();
 	if (firstEnemy.enemyIsAlive == true)
 	{
-		
 		firstEnemy.movement(850, 1200, 750);
 	}
+	if (secondEnemy.enemyIsAlive == true)
+	{
+		secondEnemy.movement(650, 800, 400);
+	}
 	firstEnemy.update();
+	secondEnemy.update();
 	enemyCollisions();
 	playerHearts();
 	levelCountdown--;
@@ -234,6 +240,7 @@ void Player::render(sf::RenderWindow& m_window)
 	m_window.draw(heartSprite);
 	m_window.draw(timeLeft);
 	button1.render(m_window);
+	secondEnemy.render(m_window);
 
 	if ((levelCountdown / 60) > 3)
 	{

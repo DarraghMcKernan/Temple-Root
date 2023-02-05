@@ -8,6 +8,7 @@
     <ClCompile Include="Relic.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Enemy2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
@@ -16,5 +17,6 @@
     <ClInclude Include="Relic.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Enemy2.h" />
   </ItemGroup>
 </Project>

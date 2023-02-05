@@ -4,6 +4,7 @@
 #include "Relic.h"
 #include "Enemy.h"
 #include "Button.h"
+#include "Enemy2.h"
 
 class Player {
 public:
@@ -61,6 +62,7 @@ private:
 	Relic timeRelic;
 	Enemy firstEnemy;
 	Button button1;
+	Enemy2 secondEnemy;
 
 	void jump();
 
