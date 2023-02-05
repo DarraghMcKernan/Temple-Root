@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game()
-	: m_window(sf::VideoMode(1920,1080,32), "Temple Root", sf::Style::Fullscreen)//screen width, screen height, bits per pixel, Name at top of Window
+	: m_window(sf::VideoMode(1920,1080,32), "Temple Root", sf::Style::Default)//screen width, screen height, bits per pixel, Name at top of Window
 {
 	init();// sets up all variables and objects
 }
