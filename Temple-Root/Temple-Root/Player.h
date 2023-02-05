@@ -47,6 +47,10 @@ private:
 
 	bool left = true;
 
+	bool winState = false;
+
+	sf::Text winMessage;
+
 	int lives = 3;
 	//hearts
 	sf::Texture heartTexture;
@@ -62,6 +66,8 @@ private:
 	Relic timeRelic;
 	Enemy firstEnemy;
 	Button button1;
+	Button button2;
+	Button button3;
 	Enemy2 secondEnemy;
 
 	void jump();
