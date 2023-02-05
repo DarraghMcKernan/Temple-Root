@@ -322,6 +322,7 @@ void Player::snapRelicToHand()
 	{
 		holdingRelic = false;
 		timeRelic.relicPos = sf::Vector2f(108, 515);
+		levelCountdown += 300;
 	}
 	if (holdingRelic == true)
 	{
