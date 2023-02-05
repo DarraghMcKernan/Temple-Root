@@ -27,4 +27,6 @@ private:
 	sf::Texture backgroundTexture;
 	//render window 
 	sf::RenderWindow m_window;
+	
+
 };

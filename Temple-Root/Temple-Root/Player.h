@@ -20,6 +20,8 @@ public:
 	void hitWalls(float t_blockXPos);
 	bool playerIsAttacking();
 
+	sf::Texture treeTexture;
+	sf::Sprite treeSprite;
 private:
 	int runningAnimations = false;
 	int idleAnimations = true;
@@ -64,6 +66,8 @@ private:
 
 	sf::Sprite pedestal;
 	sf::Texture pedestalTexture;
+
+	
 
 	Relic timeRelic;
 	Enemy firstEnemy;

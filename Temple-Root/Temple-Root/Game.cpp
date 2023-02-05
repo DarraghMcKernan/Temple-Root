@@ -82,6 +82,7 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);//clears the screen and sets a background colour
 	m_window.draw(backgroundSprite);
+	m_window.draw(myPlayer.treeSprite);
 	sf::Vector2f playerStandHere = firstLevel.render(m_window,myPlayer.PlayerSprite);
 	if (playerStandHere != sf::Vector2f(0, 0))
 	{
