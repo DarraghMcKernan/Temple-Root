@@ -67,7 +67,7 @@ private:
 	sf::Sprite pedestal;
 	sf::Texture pedestalTexture;
 
-	
+	sf::CircleShape placeHere;
 
 	Relic timeRelic;
 	Enemy firstEnemy;

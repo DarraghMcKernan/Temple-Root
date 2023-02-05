@@ -76,6 +76,11 @@ void Player::handleInput()
 
 void Player::init()
 {
+	//placeHere.setFillColor(sf::Color::Yellow);
+	placeHere.setFillColor(sf::Color(255, 255, 0, 150));
+	placeHere.setRadius(39);
+	//placeHere.setPosition(60, 465);
+
 	if (!PlayerTexture.loadFromFile("ASSETS/IMAGES/ArchaeologistSpriteSheet.png"))
 	{
 		std::cout << "error loading player\n";
@@ -147,8 +152,8 @@ void Player::init()
 		std::cout << "error loading pillar\n";
 	}
 	pedestal.setTexture(pedestalTexture);
-	pedestal.setScale(3, 3);
-	pedestal.setPosition(80, 525);
+	pedestal.setScale(3.5, 3.5);
+	pedestal.setPosition(70, 518);
 }
 
 void Player::playerHearts()
@@ -248,7 +253,7 @@ void Player::update()
 
 	if (button1.buttonPressed == true && button2.buttonPressed == true && button3.buttonPressed == true)
 	{
-		if (timeRelic.relicPos == sf::Vector2f(108, 515))
+		if (timeRelic.relicPos == sf::Vector2f(102, 500))
 		{
 			winState = true;
 		}
@@ -279,7 +284,9 @@ void Player::update()
 
 void Player::render(sf::RenderWindow& m_window)
 {
+
 	m_window.draw(pedestal);
+	m_window.draw(placeHere);
 	m_window.draw(PlayerSprite);
 	timeRelic.render(m_window);
 	m_window.draw(firstEnemy.EnemySprite);
@@ -322,15 +329,18 @@ void Player::snapRelicToHand()
 {
 	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicSprite.getGlobalBounds())&&((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
+		placeHere.setPosition(60, 465);
 		holdingRelic = true;
 		/*timeRelic.relicPos.x = PlayerPos.x += 20;
 		timeRelic.relicPos.y = PlayerPos.y;*/
 		
 	}
+	//else placeHere.setPosition(60, -465);
 	if (PlayerSprite.getGlobalBounds().intersects(pedestal.getGlobalBounds())&&holdingRelic == true)
 	{
+		placeHere.setPosition(60, -465);
 		holdingRelic = false;
-		timeRelic.relicPos = sf::Vector2f(108, 515);
+		timeRelic.relicPos = sf::Vector2f(102, 500);
 		//levelCountdown += 300;
 	}
 	if (holdingRelic == true)
@@ -371,7 +381,7 @@ void Player::enemyCollisions()
 	
 	if (PlayerSprite.getGlobalBounds().intersects(button1.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
-		if (timeRelic.relicPos == sf::Vector2f(108, 515))
+		if (timeRelic.relicPos == sf::Vector2f(102, 500))
 		{
 			if (button1.buttonPressed == false)
 			{
@@ -387,7 +397,7 @@ void Player::enemyCollisions()
 	}
 	if (PlayerSprite.getGlobalBounds().intersects(button2.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
-		if (timeRelic.relicPos == sf::Vector2f(108, 515))
+		if (timeRelic.relicPos == sf::Vector2f(102, 500))
 		{
 			if (button2.buttonPressed == false)
 			{
@@ -403,7 +413,7 @@ void Player::enemyCollisions()
 	}
 	if (PlayerSprite.getGlobalBounds().intersects(button3.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
-		if (timeRelic.relicPos == sf::Vector2f(108, 515))
+		if (timeRelic.relicPos == sf::Vector2f(102, 500))
 		{
 			if (button3.buttonPressed == false)
 			{
