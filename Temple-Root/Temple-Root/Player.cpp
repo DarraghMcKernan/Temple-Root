@@ -215,7 +215,7 @@ void Player::update()
 	}
 	if (secondEnemy.enemyIsAlive == true)
 	{
-		secondEnemy.movement(650, 800, 400);
+		secondEnemy.movement(220, 800, 230);
 	}
 	firstEnemy.update();
 	secondEnemy.update();
@@ -298,6 +298,21 @@ void Player::enemyCollisions()
 		firstEnemy.enemyIsAlive = false;
 		//lives++;
 	}
+
+	if (PlayerSprite.getGlobalBounds().intersects(secondEnemy.EnemySprite2.getGlobalBounds()) && playerIsAttacking())
+	{
+		secondEnemy.enemyIsAlive = false;
+		//lives++;
+	}
+	else if (PlayerSprite.getGlobalBounds().intersects(secondEnemy.EnemySprite2.getGlobalBounds()) && secondEnemy.enemyIsAlive == true && !playerIsAttacking())
+	{
+		if (healthLossTimer <= 0)
+		{
+			lives--;
+			healthLossTimer = 120;
+		}
+	}
+	
 	if (PlayerSprite.getGlobalBounds().intersects(button1.buttonSprite.getGlobalBounds()) && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
 		button1.isAnimating = true;

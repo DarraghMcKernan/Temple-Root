@@ -17,9 +17,11 @@ public:
 
 	bool enemyIsAlive = true;
 
-private:
-	sf::Vector2f enemyPosition2{ 650,1000 };
 	sf::Texture EnemyTexture2;
+
+private:
+	sf::Vector2f enemyPosition2{ 220,1000 };
+	
 	bool backwards = false;
 
 	int animationTimer2 = 0;
