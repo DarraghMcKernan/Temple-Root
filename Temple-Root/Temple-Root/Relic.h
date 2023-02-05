@@ -18,6 +18,12 @@ private:
 	int animationMaxSpeed = 10;
 	int animationCurrentFrame = 0;
 	int animationMaxFrame = 7;
+	sf::Vector2f rand1{ 200,200 };
+	sf::Vector2f rand2{ 700,500 };
+	sf::Vector2f rand3{ 900,900 };
+	sf::Vector2f rand4{ 1500,500 };
+	sf::Vector2f rand5{ 1200,300 };
+	sf::Vector2f rand6{ 400,800 };
 	const int SPRITE_SIZE = 16;
 	
 };

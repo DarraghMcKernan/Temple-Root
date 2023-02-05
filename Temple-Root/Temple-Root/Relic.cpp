@@ -45,6 +45,30 @@ void Relic::handleAnimation()
 
 void Relic::randomPos()
 {
-	relicPos.x = rand() % 1920;
-	relicPos.y = rand() % 1080;
+	int random = (rand() % 6) + 1;
+	if (random == 1)
+	{
+		relicPos = rand1;
+	}
+	else if (random == 2)
+	{
+		relicPos = rand2;
+	}
+	else if (random == 3)
+	{
+		relicPos = rand3;
+	}
+	else if (random == 4)
+	{
+		relicPos = rand4;
+	}
+	else if (random == 5)
+	{
+		relicPos = rand5;
+	}
+	else if (random == 6)
+	{
+		relicPos = rand6;
+	}
+	
 }
