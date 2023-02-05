@@ -79,7 +79,7 @@ void Player::init()
 	//placeHere.setFillColor(sf::Color::Yellow);
 	placeHere.setFillColor(sf::Color(255, 255, 0, 150));
 	placeHere.setRadius(39);
-	//placeHere.setPosition(60, 465);
+	placeHere.setPosition(60, -465);
 
 	if (!PlayerTexture.loadFromFile("ASSETS/IMAGES/ArchaeologistSpriteSheet.png"))
 	{
