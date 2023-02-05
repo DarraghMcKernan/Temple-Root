@@ -33,7 +33,7 @@ void Player::handleInput()
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) || sf::Joystick::isButtonPressed(0, 3))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y) || sf::Joystick::isButtonPressed(0, 3))
 	{
 		if (levelCountdown <=0)
 		{
@@ -96,7 +96,7 @@ void Player::init()
 	retry.setCharacterSize(70);
 	retry.setFillColor(sf::Color::White);
 	retry.setPosition(960,400);
-	retry.setString("Press R to retry");
+	retry.setString("Press Y to retry");
 	retry.setOrigin(300, 0);
 
 	endScreen.setSize(sf::Vector2f(1920, 1080));
@@ -183,7 +183,7 @@ void Player::handleAnimations()
 }
 
 void Player::update()
-{
+{	
 	if (currentlyJumping == true) {
 		jump();
 	}
@@ -258,7 +258,7 @@ void Player::render(sf::RenderWindow& m_window)
 
 void Player::snapRelicToHand()
 {
-	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicSprite.getGlobalBounds())&&(sf::Keyboard::isKeyPressed(sf::Keyboard::E)))
+	if (PlayerSprite.getGlobalBounds().intersects(timeRelic.relicSprite.getGlobalBounds())&&((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
 		holdingRelic = true;
 		/*timeRelic.relicPos.x = PlayerPos.x += 20;
@@ -329,7 +329,7 @@ void Player::hitWalls(float t_blockXPos)
 }
 bool Player::playerIsAttacking()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F) || (sf::Joystick::getAxisPosition(0, sf::Joystick::Z) < -50))
 	{
 		return true;
 	}
