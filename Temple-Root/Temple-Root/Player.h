@@ -53,6 +53,8 @@ private:
 	void playerHearts();
 	int healthLossTimer = 120;
 
+	int relicTimer = 120;
+
 	sf::Sprite pedestal;
 	sf::Texture pedestalTexture;
 
