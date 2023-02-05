@@ -10,13 +10,18 @@ void Level1::init()
 	wallPieces.setScale(2, 2);
 	wallPieces.rotate(-90);
 
+	if(!treeTexture.loadFromFile("ASSETS/IMAGES/tree.png"))
+	{ }
+	treeSprite.setTexture(treeTexture);
+	treeSprite.setPosition(1800, 100);
+	//treeSprite.setScale(2, 2);
 	//myEnemy.init();
 }
 
 sf::Vector2f Level1::render(sf::RenderWindow& m_window, sf::Sprite t_player)
 {
 	//m_window.draw(myEnemy.EnemySprite);
-
+	//m_window.draw(treeSprite);
 	for (int index = 0; index < floorAmount; index++)
 	{
 		floorPieces.setPosition(xCoords[index], yCoords[index]);

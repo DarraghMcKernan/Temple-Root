@@ -33,6 +33,16 @@ void Player::handleInput()
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	{
+		if (levelCountdown <=0)
+		{
+			dead = false;
+			lives = 3;
+			levelCountdown = maxTime;
+			PlayerPos = spawnPos;
+		}
+	}
 	if (sf::Joystick::isButtonPressed(0, 0) && currentlyJumping == false)
 	{
 		currentlyJumping = true;
@@ -75,19 +85,42 @@ void Player::init()
 	timeLeft.setFillColor(sf::Color::White);
 	timeLeft.setPosition(1600, 1);
 
-	levelCountdown = 3600;
+	retry.setFont(pixelFont);
+	retry.setCharacterSize(70);
+	retry.setFillColor(sf::Color::White);
+	retry.setPosition(960,400);
+	retry.setString("Press R to retry");
+	retry.setOrigin(300, 0);
+
+	endScreen.setSize(sf::Vector2f(1920, 1080));
+	endScreen.setFillColor(sf::Color(255, 255, 255, 0));
+
+	levelCountdown = maxTime; //3600;
 	button1.init();
 }
 
 void Player::playerHearts()
 {
+	if (lives == 3)
+	{
+		heartSprite.setTextureRect(sf::IntRect(0, 0, 48, 16));
+	}
 	if (lives == 2)
 	{
 		heartSprite.setTextureRect(sf::IntRect(0, 0, 32, 16));
 	}
-	else if (lives == 1)
+	if (lives == 1)
 	{
 		heartSprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	}
+	if (lives == 0)
+	{
+		heartSprite.setTextureRect(sf::IntRect(0, 0, 0,16));
+		if (dead == false)
+		{
+			dead = true;
+			levelCountdown = 240;
+		}
 	}
 }
 
@@ -166,6 +199,10 @@ void Player::update()
 	enemyCollisions();
 	playerHearts();
 	levelCountdown--;
+	if (levelCountdown < 0)
+	{
+		levelCountdown = 0;
+	}
 	int seconds = levelCountdown / 60;
 	timeLeft.setString("Time left: "+std::to_string(seconds));
 	PlayerSprite.setPosition(PlayerPos);
@@ -179,6 +216,25 @@ void Player::render(sf::RenderWindow& m_window)
 	m_window.draw(heartSprite);
 	m_window.draw(timeLeft);
 	button1.render(m_window);
+	if ((levelCountdown / 60) > 3)
+	{
+		endScreen.setFillColor(sf::Color(0, 0, 0, 0));
+		greyOut = 0;
+	}
+	if ((levelCountdown / 60) < 3)
+	{
+		greyOut+=2;
+		if (greyOut > 255)
+		{
+			greyOut = 255;
+		}
+		endScreen.setFillColor(sf::Color(0, 0, 0, greyOut));
+	}
+	m_window.draw(endScreen);
+	if (levelCountdown / 60 == 0)
+	{
+		m_window.draw(retry);
+	}
 }
 
 void Player::snapRelicToHand()
@@ -204,7 +260,7 @@ void Player::enemyCollisions()
 	if (PlayerSprite.getGlobalBounds().intersects(firstEnemy.EnemySprite.getGlobalBounds()) && playerIsAttacking())
 	{
 		firstEnemy.enemyIsAlive = false;
-		lives++;
+		//lives++;
 	}
 	if (PlayerSprite.getGlobalBounds().intersects(button1.button.getGlobalBounds()) && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{

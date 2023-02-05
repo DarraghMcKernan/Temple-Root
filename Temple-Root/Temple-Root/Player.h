@@ -30,8 +30,13 @@ private:
 
 	sf::Font pixelFont;
 	sf::Text timeLeft;
-	
+	sf::Text retry;
+	int greyOut = 0;
+	sf::RectangleShape endScreen;
 	int levelCountdown;
+	int maxTime = 3600;
+
+	bool dead = false;
 
 	bool currentlyOnBlock = false;
 
@@ -70,7 +75,8 @@ private:
 	int animationMaxFrame = 7;
 
 	sf::Texture PlayerTexture;
-	sf::Vector2f PlayerPos = {48,500};
+	sf::Vector2f PlayerPos = { 48,500 };
+	sf::Vector2f spawnPos = { 48,500 };
 
 	float XSpeed = 5.0f;
 };

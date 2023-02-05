@@ -7,6 +7,8 @@ public:
 	void init();
 
 	Enemy myEnemy;
+	sf::Sprite treeSprite;
+	sf::Texture treeTexture;
 
 	sf::Vector2f render(sf::RenderWindow& m_window, sf::Sprite t_player);
 	sf::Vector2f handleWallCollisions(sf::Sprite t_player);
