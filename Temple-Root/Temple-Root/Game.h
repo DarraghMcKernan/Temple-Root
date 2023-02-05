@@ -6,6 +6,9 @@
 #include "Relic.h"
 #include "Enemy.h"
 #include "Level1.h"
+#include <SFML/Audio.hpp>
+
+
 
 
 class Game {
@@ -18,6 +21,8 @@ private:
 	void init();
 	void update(sf::Time t_deltaTime);
 	void render();
+
+	sf::Music bgMusic;
 
 	Player myPlayer;
 	Level1 firstLevel;

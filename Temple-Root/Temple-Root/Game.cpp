@@ -53,6 +53,11 @@ void Game::init()
 {
 	myPlayer.init();
 	firstLevel.init();
+	if(!bgMusic.openFromFile("ASSETS/AUDIO/music.ogg"))
+	{ }
+	bgMusic.play();
+	bgMusic.setLoop(true);
+	bgMusic.setVolume(100.0f);
 
 	if(!backgroundTexture.loadFromFile("ASSETS/IMAGES/StoneTiles.png"))
 	{ }
