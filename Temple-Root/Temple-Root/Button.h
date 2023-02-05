@@ -8,6 +8,8 @@ public:
 	void update();
 	void render(sf::RenderWindow& m_window);
 	sf::CircleShape button;
+	sf::Texture buttonTexture;
+	sf::Sprite buttonSprite;
 private:
 	
 
