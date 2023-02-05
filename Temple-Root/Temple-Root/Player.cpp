@@ -203,7 +203,9 @@ void Player::update()
 		handleAnimations();
 	}
 	healthLossTimer--;
+	relicTimer--;
 	timeRelic.update();
+	button1.update();
 	snapRelicToHand();
 	if (firstEnemy.enemyIsAlive == true)
 	{
@@ -289,10 +291,16 @@ void Player::enemyCollisions()
 		firstEnemy.enemyIsAlive = false;
 		//lives++;
 	}
-	if (PlayerSprite.getGlobalBounds().intersects(button1.button.getGlobalBounds()) && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	if (PlayerSprite.getGlobalBounds().intersects(button1.buttonSprite.getGlobalBounds()) && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
-		timeRelic.randomPos();
+		button1.isAnimating = true;
+		if (relicTimer <= 0)
+		{
+			timeRelic.randomPos();
+			relicTimer = 120;
+		}
 	}
+		
 }
 void Player::keepPlayerOnBlock(float t_blockYPos)
 {
