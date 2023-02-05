@@ -174,7 +174,7 @@ void Player::jump()
 	gravity = 0.6;
 	if (velocityY > 0.01)
 	{
-		currentlyJumping = false;
+		//currentlyJumping = false;
 	}
 }
 
@@ -413,7 +413,11 @@ void Player::keepPlayerOnBlock(float t_blockYPos)
 {
 	if (currentlyJumping == true)
 	{
-		PlayerPos.y = t_blockYPos + 64;
+		if (velocityY < 2)
+		{
+			PlayerPos.y = t_blockYPos + 64;
+		}
+
 	}
 	else{
 
