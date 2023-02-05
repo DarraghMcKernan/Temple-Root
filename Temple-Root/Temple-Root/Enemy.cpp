@@ -47,6 +47,7 @@ void Enemy::update()
 	animationTimer++;
 	if (animationTimer >= animationMaxSpeed)
 	{
+		EnemySprite.setTexture(EnemyTexture);
 		animationTimer = 0;
 		animationCurrentFrame++;
 		if (animationCurrentFrame >= animationMaxFrame)

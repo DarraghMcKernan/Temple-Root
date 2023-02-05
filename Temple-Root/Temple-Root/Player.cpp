@@ -11,9 +11,13 @@ void Player::handleInput()
 		PlayerSprite.setScale(3, 3);
 		runningAnimations = true;
 		idleAnimations = false;
-		if (PlayerPos.x >= 1912)
+		if (PlayerPos.x >= 1912 && winState == false)
 		{
 			PlayerPos.x = 1912;
+		}
+		if (PlayerPos.x > 1916)
+		{
+			winMessage.setString("Thank you for playing our demo : )");
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Joystick::getAxisPosition(0, sf::Joystick::X) < -20)
@@ -37,6 +41,17 @@ void Player::handleInput()
 	{
 		if (levelCountdown <=0)
 		{
+			button1.buttonPressed = false;
+			button2.buttonPressed = false;
+			button3.buttonPressed = false;
+			button1.init();
+			button2.init();
+			button2.buttonSprite.setPosition(515, 200);
+			button3.init();
+			button3.buttonSprite.setPosition(1858, 256);
+
+			firstEnemy.enemyIsAlive = true;
+
 			dead = false;
 			lives = 3;
 			levelCountdown = maxTime;
@@ -99,11 +114,22 @@ void Player::init()
 	retry.setString("Press Y to retry");
 	retry.setOrigin(300, 0);
 
+	winMessage.setFont(pixelFont);
+	winMessage.setCharacterSize(70);
+	winMessage.setFillColor(sf::Color::White);
+	winMessage.setPosition(650, 500);
+
+	winMessage.setOrigin(300, 0);
+
 	endScreen.setSize(sf::Vector2f(1920, 1080));
 	endScreen.setFillColor(sf::Color(255, 255, 255, 0));
 
 	levelCountdown = maxTime; //3600;
 	button1.init();
+	button2.init();
+	button2.buttonSprite.setPosition(515, 200);
+	button3.init();
+	button3.buttonSprite.setPosition(1858, 256);
 
 	if(!pedestalTexture.loadFromFile("ASSETS/IMAGES/pillar.png"))
 	{
@@ -206,6 +232,17 @@ void Player::update()
 	relicTimer--;
 	timeRelic.update();
 	button1.update();
+	button2.update();
+	button3.update();
+
+	if (button1.buttonPressed == true && button2.buttonPressed == true && button3.buttonPressed == true)
+	{
+		if (timeRelic.relicPos == sf::Vector2f(108, 515))
+		{
+			winState = true;
+		}
+	}
+
 	snapRelicToHand();
 	if (firstEnemy.enemyIsAlive == true)
 	{
@@ -234,6 +271,10 @@ void Player::render(sf::RenderWindow& m_window)
 	m_window.draw(heartSprite);
 	m_window.draw(timeLeft);
 	button1.render(m_window);
+	button2.render(m_window);
+	button3.render(m_window);
+
+	
 
 	if ((levelCountdown / 60) > 3)
 	{
@@ -249,11 +290,17 @@ void Player::render(sf::RenderWindow& m_window)
 		}
 		endScreen.setFillColor(sf::Color(0, 0, 0, greyOut));
 	}
+	if (PlayerPos.x > 1916)
+	{
+		endScreen.setFillColor(sf::Color(0, 0, 0, 255));
+	}
 	m_window.draw(endScreen);
-	if (levelCountdown / 60 == 0)
+
+	if (levelCountdown / 60 == 0 && winState == false)
 	{
 		m_window.draw(retry);
 	}
+	m_window.draw(winMessage);
 }
 
 void Player::snapRelicToHand()
@@ -291,14 +338,44 @@ void Player::enemyCollisions()
 		firstEnemy.enemyIsAlive = false;
 		//lives++;
 	}
-	if (PlayerSprite.getGlobalBounds().intersects(button1.buttonSprite.getGlobalBounds()) && sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	if (PlayerSprite.getGlobalBounds().intersects(button1.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
 	{
-		button1.isAnimating = true;
-		if (relicTimer <= 0)
+		if (button1.buttonPressed == false)
 		{
-			timeRelic.randomPos();
-			relicTimer = 120;
+			button1.isAnimating = true;
+			if (relicTimer <= 0)
+			{
+				timeRelic.randomPos();
+				relicTimer = 120;
+			}
 		}
+		button1.buttonPressed = true;
+	}
+	if (PlayerSprite.getGlobalBounds().intersects(button2.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
+	{
+		if (button2.buttonPressed == false)
+		{
+			button2.isAnimating = true;
+			if (relicTimer <= 0)
+			{
+				timeRelic.randomPos();
+				relicTimer = 120;
+			}
+		}
+		button2.buttonPressed = true;
+	}
+	if (PlayerSprite.getGlobalBounds().intersects(button3.buttonSprite.getGlobalBounds()) && ((sf::Keyboard::isKeyPressed(sf::Keyboard::E)) || sf::Joystick::isButtonPressed(0, 2)))
+	{
+		if (button3.buttonPressed == false)
+		{
+			button3.isAnimating = true;
+			if (relicTimer <= 0)
+			{
+				timeRelic.randomPos();
+				relicTimer = 120;
+			}
+		}
+		button3.buttonPressed = true;
 	}
 		
 }

@@ -1,4 +1,6 @@
 #include "Relic.h"
+#include <cstdlib>
+#include <ctime>
 
 void Relic::init()
 {
@@ -45,6 +47,7 @@ void Relic::handleAnimation()
 
 void Relic::randomPos()
 {
+	srand((unsigned)time(NULL));
 	int random = (rand() % 6) + 1;
 	if (random == 1)
 	{
