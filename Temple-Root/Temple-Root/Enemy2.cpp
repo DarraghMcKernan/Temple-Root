@@ -6,6 +6,10 @@ void Enemy2::init()
 	{
 		std::cout << "problem loading texture";
 	}
+	if (!DeadEnemy2.loadFromFile("ASSETS/IMAGES/spike-enemy-dead.png"))
+	{
+		std::cout << "problem loading texture";
+	}
 	EnemySprite2.setTextureRect(sf::IntRect(0, 0, 16, 16));
 	EnemySprite2.setTexture(EnemyTexture2);
 	EnemySprite2.setScale(3, 3);
@@ -37,6 +41,8 @@ void Enemy2::movement(int t_min, int t_max, int t_yPos)
 
 	enemyPosition2.y = t_yPos;
 	EnemySprite2.setPosition(enemyPosition2);
+
+	
 }
 
 void Enemy2::update()
@@ -57,6 +63,13 @@ void Enemy2::update()
 
 	}
 	//EnemySprite2.setPosition(enemyPosition2);
+	if (enemyIsAlive == false)
+	{
+		EnemySprite2.setTexture(DeadEnemy2);
+		EnemySprite2.setTextureRect(sf::IntRect(0, 0, 16, 16));
+	}
+	else {
+	}
 }
 
 void Enemy2::render(sf::RenderWindow& m_window)
