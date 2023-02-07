@@ -6,7 +6,7 @@ Game::Game()
 	init();// sets up all variables and objects
 }
 
-void Game::run()
+void Game::run()//runs the game at 60 frames per second
 {
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -51,11 +51,11 @@ void Game::processKeys(sf::Event t_event)
 
 void Game::init()
 {
-	myPlayer.init();
+	myPlayer.init();//sets up all variables that player uses
 	firstLevel.init();
 	if(!bgMusic.openFromFile("ASSETS/AUDIO/music.ogg"))
 	{ }
-	bgMusic.play();
+	bgMusic.play();//start music
 	bgMusic.setLoop(true);
 	bgMusic.setVolume(100.0f);
 
@@ -69,8 +69,8 @@ void Game::init()
 void Game::update(sf::Time t_deltaTime)
 {
 	myPlayer.handleInput();//used for player movement
-	sf::Vector2f wallHit = firstLevel.handleWallCollisions(myPlayer.PlayerSprite);
-	if (wallHit != sf::Vector2f(0, 0))
+	sf::Vector2f wallHit = firstLevel.handleWallCollisions(myPlayer.PlayerSprite);//wallhit holds the coordinates of a block that has collided with the player
+	if (wallHit != sf::Vector2f(0, 0))// if the value is NOT 0,0 send the value into the hitwalls function so the player can collide
 	{
 		myPlayer.hitWalls(wallHit.x);
 	}
@@ -88,10 +88,10 @@ void Game::render()
 	m_window.clear(sf::Color::White);//clears the screen and sets a background colour
 	m_window.draw(backgroundSprite);
 	m_window.draw(myPlayer.treeSprite);
-	sf::Vector2f playerStandHere = firstLevel.render(m_window,myPlayer.PlayerSprite);
+	sf::Vector2f playerStandHere = firstLevel.render(m_window,myPlayer.PlayerSprite);//genuinely scuffed way of doing floor collisions, not even sure why i did this lmao
 	if (playerStandHere != sf::Vector2f(0, 0))
 	{
-		myPlayer.keepPlayerOnBlock(playerStandHere.y);
+		myPlayer.keepPlayerOnBlock(playerStandHere.y);//places the player on the y coordinate of a block that has been collided with, this should be the top of the block provided origin hasnt been changed
 	}
 	myPlayer.render(m_window);
 	m_window.display();//shows evrything on screen (important)

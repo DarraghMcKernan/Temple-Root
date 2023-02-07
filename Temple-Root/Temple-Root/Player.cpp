@@ -11,7 +11,7 @@ void Player::handleInput()
 		PlayerSprite.setScale(3, 3);
 		runningAnimations = true;
 		idleAnimations = false;
-		if (PlayerPos.x >= 1912 && winState == false)
+		if (PlayerPos.x >= 1912 && winState == false) // move right
 		{
 			PlayerPos.x = 1912;
 		}
@@ -25,23 +25,23 @@ void Player::handleInput()
 		left = true;
 		PlayerPos.x -= XSpeed;
 		PlayerSprite.setScale(-3, 3);
-		runningAnimations = true;
+		runningAnimations = true; // move left
 		idleAnimations = false;
 		if (PlayerPos.x <= 8)
 		{
 			PlayerPos.x = 8;
 		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && currentlyJumping == false)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && currentlyJumping == false) // jump
 	{
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y) || sf::Joystick::isButtonPressed(0, 3))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y) || sf::Joystick::isButtonPressed(0, 3)) // restart
 	{
 		if (levelCountdown <=0)
 		{
-			button1.buttonPressed = false;
+			button1.buttonPressed = false;//reset every needed variable to its starting values so the game can reset as smoothly as possible
 			button2.buttonPressed = false;
 			button3.buttonPressed = false;
 			button1.init();
@@ -58,7 +58,7 @@ void Player::handleInput()
 			PlayerPos = spawnPos;
 		}
 	}
-	if (sf::Joystick::isButtonPressed(0, 0) && currentlyJumping == false)
+	if (sf::Joystick::isButtonPressed(0, 0) && currentlyJumping == false)// if A on XBOX or X on PS controllers is pressed
 	{
 		currentlyJumping = true;
 		velocityY = -maxJumpVelocity;
@@ -67,7 +67,7 @@ void Player::handleInput()
 	{
 		attackAnimation = true;
 	}
-	if ((sf::Joystick::getAxisPosition(0, sf::Joystick::Z) < -50))
+	if ((sf::Joystick::getAxisPosition(0, sf::Joystick::Z) < -50)) // Right Trigger
 	{
 		attackAnimation = true;
 	}
@@ -186,10 +186,10 @@ void Player::jump()
 	velocityY = velocityY + gravity;
 	PlayerPos.y += velocityY;
 	gravity = 0.6;
-	if (velocityY > 0.01)
-	{
-		//currentlyJumping = false;
-	}
+	//if (velocityY > 0.01)
+	//{
+	//	//currentlyJumping = false;
+	//}
 }
 
 void Player::handleAnimations()
@@ -244,14 +244,14 @@ void Player::update()
 		}
 		handleAnimations();
 	}
-	healthLossTimer--;
+	healthLossTimer--;// cooldown on dying so you dont die instantly
 	relicTimer--;
 	timeRelic.update();
 	button1.update();
 	button2.update();
 	button3.update();
 
-	if (button1.buttonPressed == true && button2.buttonPressed == true && button3.buttonPressed == true)
+	if (button1.buttonPressed == true && button2.buttonPressed == true && button3.buttonPressed == true)// used to check if the player has reached all requirements to progress
 	{
 		if (timeRelic.relicPos == sf::Vector2f(102, 500))
 		{
@@ -303,7 +303,7 @@ void Player::render(sf::RenderWindow& m_window)
 		endScreen.setFillColor(sf::Color(0, 0, 0, 0));
 		greyOut = 0;
 	}
-	if ((levelCountdown / 60) < 3)
+	if ((levelCountdown / 60) < 3)// used to fade out the screen
 	{
 		greyOut+=2;
 		if (greyOut > 255)

@@ -27,18 +27,18 @@ void Button::update()
 	if (isAnimating == true)
 	{
 		animationTimer++;
-		if (animationTimer >= animationMaxSpeed)
+		if (animationTimer >= animationMaxSpeed)//used to have a set amount of frames between different animations being played
 		{
 			animationTimer = 0;
-			animationCurrentFrame++;
-			if (animationCurrentFrame >= animationMaxFrame)
+			animationCurrentFrame++;//used to move to next frame in spritesheet
+			if (animationCurrentFrame >= animationMaxFrame)//if you get to the end of the spritesheet
 			{
 				animationCurrentFrame = 0;
 				isAnimating = false;
 				buttonSprite.setTexture(greenTexture);
 				buttonSprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
 			}
-			buttonSprite.setTextureRect(sf::IntRect((16 * animationCurrentFrame), 0, 16, 16));
+			buttonSprite.setTextureRect(sf::IntRect((16 * animationCurrentFrame), 0, 16, 16));//X coord in spritesheet, Y coord in spritesheet, x width of image, y height of iamge
 		}
 	}
 	

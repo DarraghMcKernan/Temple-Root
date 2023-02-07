@@ -19,12 +19,12 @@ void Enemy::init()
 
 void Enemy::movement(int t_min, int t_max,int t_yPos)
 {
-	if (enemyPosition.x >= t_min && enemyPosition.x <= t_max && backwards == false)
+	if (enemyPosition.x >= t_min && enemyPosition.x <= t_max && backwards == false)//if the enemy is within its specified zone and is moving right
 	{
 		enemyPosition.x++;
-		EnemySprite.setScale(-3, 3);
+		EnemySprite.setScale(-3, 3);//flip image
 
-		if (enemyPosition.x >= t_max)
+		if (enemyPosition.x >= t_max)//if the enemy reaches its maximum zone size 
 		{
 			backwards = true;
 		}

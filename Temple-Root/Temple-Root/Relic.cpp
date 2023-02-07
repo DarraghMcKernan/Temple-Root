@@ -1,6 +1,6 @@
 #include "Relic.h"
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib>//needed for srand
+#include <ctime>//needed for srand
 
 void Relic::init()
 {
@@ -47,9 +47,9 @@ void Relic::handleAnimation()
 
 void Relic::randomPos()
 {
-	srand((unsigned)time(NULL));
-	int random = (rand() % 6) + 1;
-	if (random == 1)
+	srand((unsigned)time(NULL));//used for time based random numbers - the easiest and best way to get truly 'random' numbers
+	int random = (rand() % 6) + 1;//get a random number
+	if (random == 1)//pick from preset coords
 	{
 		relicPos = rand1;
 	}

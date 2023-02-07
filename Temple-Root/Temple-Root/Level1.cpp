@@ -22,12 +22,12 @@ sf::Vector2f Level1::render(sf::RenderWindow& m_window, sf::Sprite t_player)
 {
 	//m_window.draw(myEnemy.EnemySprite);
 	//m_window.draw(treeSprite);
-	for (int index = 0; index < floorAmount; index++)
+	for (int index = 0; index < floorAmount; index++)//keep looping until all floors have had their positions set from the array of coordinates
 	{
-		floorPieces.setPosition(xCoords[index], yCoords[index]);
-		m_window.draw(floorPieces);
+		floorPieces.setPosition(xCoords[index], yCoords[index]);//place floor
+		m_window.draw(floorPieces);//draw floor - this allows 1 single sprite to be in several places at 1 time
 	}
-	for (int index = 0; index < wallsAmount; index++)
+	for (int index = 0; index < wallsAmount; index++)//same as floors but walls required a new type of collisions and so needed a new sprite
 	{
 		wallPieces.setPosition(wallXCoords[index], wallYCoords[index]);
 		m_window.draw(wallPieces);
@@ -35,7 +35,7 @@ sf::Vector2f Level1::render(sf::RenderWindow& m_window, sf::Sprite t_player)
 	for (int index = 0; index < floorAmount; index++)
 	{
 		floorPieces.setPosition(xCoords[index], yCoords[index]);
-		if (t_player.getGlobalBounds().intersects(floorPieces.getGlobalBounds()))
+		if (t_player.getGlobalBounds().intersects(floorPieces.getGlobalBounds()))//used for the brain melting collisions
 		{
 			return sf::Vector2f(xCoords[index], yCoords[index]);
 		}
@@ -47,10 +47,10 @@ sf::Vector2f Level1::handleWallCollisions(sf::Sprite t_player)
 {
 	for (int index = 0; index < wallsAmount; index++)
 	{
-		wallPieces.setPosition(wallXCoords[index], wallYCoords[index]);
+		wallPieces.setPosition(wallXCoords[index], wallYCoords[index]);//place the walls then check for collisons 
 		if (t_player.getGlobalBounds().intersects(wallPieces.getGlobalBounds()))
 		{
-			return sf::Vector2f(wallXCoords[index], wallYCoords[index]);
+			return sf::Vector2f(wallXCoords[index], wallYCoords[index]);//send back coords of the wall that has collided
 		}
 	}
 
